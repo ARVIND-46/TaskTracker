@@ -22,9 +22,12 @@ def addTask(request):
             priority=priority,
             status=status,
         )
-        return redirect("taskList")  # Redirect to the task list view
+        return redirect("task_list")  # Redirect to the task list view
 
     return render(request,'polls/addTask.html')
+def task_list(request):
+    tasks = Task.objects.all()  # Retrieve all tasks from the database
+    return render(request, 'polls/displayTL.html', {'tasks': tasks})
 
 
 #def delTask:

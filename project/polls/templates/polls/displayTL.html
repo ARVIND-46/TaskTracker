@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task List</title>
+    
+</head>
+<body>
+    <h1>Your Tasks</h1>
+    <ul>
+        {% for task in tasks %}
+            <li>
+                <strong>Title:</strong> {{ task.title }}<br>
+                <strong>Description:</strong> {{ task.description }}<br>
+                <strong>Due Date:</strong> {{ task.due_date }}<br>
+                <strong>Status:</strong> {{ task.status }}<br>
+            </li>
+            <hr>
+        {% empty %}
+            <p>No tasks available.</p>
+        {% endfor %}
+    </ul>
+</body>
+</html>
