@@ -3,22 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <title>Task List</title>
-    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            margin: 20px 0;
+        }
+        .task-box {
+            width: 45%;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            margin: 10px 0;
+            color: #333;
+        }
+        h2 {
+            text-align: center;
+            color: #555;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        hr {
+            margin: 10px 0;
+        }
+    </style>
 </head>
 <body>
     <h1>Your Tasks</h1>
-    <ul>
-        {% for task in tasks %}
-            <li>
-                <strong>Title:</strong> {{ task.title }}<br>
-                <strong>Description:</strong> {{ task.description }}<br>
-                <strong>Due Date:</strong> {{ task.due_date }}<br>
-                <strong>Status:</strong> {{ task.status }}<br>
-            </li>
-            <hr>
-        {% empty %}
-            <p>No tasks available.</p>
-        {% endfor %}
-    </ul>
+    <div class="container">
+        <!-- Pending Tasks -->
+        <div class="task-box">
+            <h2>Pending Tasks</h2>
+            <ul>
+                {% for task in pending_tasks %}
+                    <li>
+                        <strong>Title:</strong> {{ task.title }}<br>
+                        <strong>Description:</strong> {{ task.description }}<br>
+                        <strong>Due Date:</strong> {{ task.due_date }}<br>
+                        <strong>Status:</strong> {{ task.status }}<br><br>
+                        <button id="completedbtn">completed</button>
+                    </li>
+                    <hr>
+                {% empty %}
+                    <p>No pending tasks available.</p>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Completed Tasks -->
+        <div class="task-box">
+            <h2>Completed Tasks</h2>
+            <ul>
+                {% for task in completed_tasks %}
+                    <li>
+                        <strong>Title:</strong> {{ task.title }}<br>
+                        <strong>Description:</strong> {{ task.description }}<br>
+                        <strong>Due Date:</strong> {{ task.due_date }}<br>
+                        <strong>Status:</strong> {{ task.status }}<br>
+                    </li>
+                    <hr>
+                {% empty %}
+                    <p>No completed tasks available.</p>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 </body>
 </html>
