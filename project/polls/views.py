@@ -1,6 +1,6 @@
-from django.shortcuts import render,redirect
-from django.http import HttpResponse
-from .models import Task
+from django.shortcuts import render,redirect,get_object_or_404
+from django.http import HttpResponse 
+from .models import Task 
 from django.contrib.auth.decorators import login_required
 
 
@@ -26,23 +26,30 @@ def addTask(request):
         return redirect("task_list")  # Redirect to the task list view
 
     return render(request,'polls/addTask.html')
-''''
-def task_list(request):
-    tasks = Task.objects.all()  # Retrieve all tasks from the database
-    return render(request, 'polls/displayTL.html', {'tasks': tasks})
-    '''
-def display_tasks(request):
-    # Separate tasks into pending and completed
-    pending_tasks = Task.objects.filter(status='Pending')
-    completed_tasks = Task.objects.filter(status='Completed')
 
-    # Pass both lists to the template
-    context = {
+def display_tasks(request):
+    pending_tasks = Task.objects.filter(is_completed=False)
+    completed_tasks = Task.objects.filter(is_completed=True)
+    return render(request, 'polls/displayTL.html', {
         'pending_tasks': pending_tasks,
         'completed_tasks': completed_tasks,
-    }
-    return render(request, 'polls/displayTL.html', context)
+    })
 
+def complete_Task(request,task_id):
+     if request.method == 'POST':
+        # Get the specific task by its ID
+        task = get_object_or_404(Task,id=task_id)
+        task.is_completed =True
+        task.save()
+    # Redirect back to the task list view
+        return redirect('display_tasks')
+     
+# views.py
+def displayTL(request):
+    tasks = Task.objects.all()  # Fetch all tasks
+    return render(request, 'displayTL.html', {'tasks': tasks})
+
+    
 
 
 #def delTask:
