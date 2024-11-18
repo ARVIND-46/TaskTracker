@@ -125,6 +125,10 @@
                         <strong>Description:</strong> {{ task.description }}<br>
                         <strong>Due Date:</strong> {{ task.due_date|date:"Y-m-d" }}<br>
                         <strong>Status:</strong> Completed<br>
+                        <form action="{% url 'reset_task' task.id %}" method="POST" style="margin-top: 10px;">
+                            {% csrf_token %}
+                            <button type="submit">Reset</button>
+                        </form>
                     </li>
                 {% empty %}
                     <p>No completed tasks available.</p>

@@ -43,7 +43,13 @@ def complete_Task(request,task_id):
         task.save()
     # Redirect back to the task list view
         return redirect('display_tasks')
-     
+def reset_task(request,task_id):
+    if request.method =='POST':
+        task = get_object_or_404(Task,id=task_id)
+        task.status ="Pending"
+        task.is_completed = False
+        task.save()
+        return redirect('display_tasks')     
 # views.py
 def displayTL(request):
     tasks = Task.objects.all()  # Fetch all tasks
