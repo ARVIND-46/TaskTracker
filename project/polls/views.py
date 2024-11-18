@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def taskList(request):
-    return render(request,'polls/taskList.html')
+    return render(request,'polls/index.html')
 
 def addTask(request):
     if request.method == "POST":
