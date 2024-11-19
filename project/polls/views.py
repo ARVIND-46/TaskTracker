@@ -58,5 +58,5 @@ def displayTL(request):
     
 
 
-#def delTask:
+
 #def editTask:
