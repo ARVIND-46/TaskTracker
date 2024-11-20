@@ -50,10 +50,16 @@ def reset_task(request,task_id):
         task.is_completed = False
         task.save()
         return redirect('display_tasks')     
-# views.py
+
 def displayTL(request):
     tasks = Task.objects.all()  # Fetch all tasks
     return render(request, 'displayTL.html', {'tasks': tasks})
+
+def delTask(request,task_id):
+    if request.method == "POST":
+        task =get_object_or_404(Task,id=task_id)
+        task.delete()
+        return redirect('display_tasks')
 
     
 

@@ -108,6 +108,10 @@
                             {% csrf_token %}
                             <button type="submit">Mark as Complete</button>
                         </form>
+                        <form action="{% url 'delTask' task.id %}" method="POST" style="margin-top: 10px;">
+                            {% csrf_token %}
+                            <button type="submit">Delete</button>
+                        </form>
                     </li>
                 {% empty %}
                     <p>No pending tasks available.</p>
